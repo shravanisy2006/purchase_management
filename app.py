@@ -1,5 +1,6 @@
 import streamlit as st
 import sqlite3
+import pandas as pd
 
 conn = sqlite3.connect("purchase.db", check_same_thread=False)
 c = conn.cursor()
@@ -26,7 +27,6 @@ if choice == "Supplier":
         conn.commit()
         st.success("Added!")
 
-   import pandas as pd
 
     data = c.execute("SELECT * FROM supplier").fetchall()
     df = pd.DataFrame(data, columns=["ID", "Name", "Contact", "Address"])
