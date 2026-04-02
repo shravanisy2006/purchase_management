@@ -12,24 +12,48 @@ c.execute("CREATE TABLE IF NOT EXISTS purchase(id INTEGER PRIMARY KEY, supplier_
 
 st.title("🛒 Purchase Management System")
 
-if st.button("Generate Dummy Data"):
+st.title("🛒 Purchase Management System")
+
+import random
+
+if st.button("Generate Realistic Data"):
+    supplier_names = [
+        "ABC Traders", "Sharma Supplies", "Global Distributors",
+        "Mahalaxmi Enterprises", "Om Sai Traders", "Prime Wholesale",
+        "Reliance Supply Co.", "Kiran Enterprises", "Vijay Suppliers",
+        "Metro Distributors"
+    ]
+
+    product_names = [
+        "Laptop", "Keyboard", "Mouse", "Monitor", "Printer",
+        "USB Cable", "Hard Disk", "Router", "SSD", "Graphics Card"
+    ]
+
     # Suppliers
-    for i in range(1, 21):
+    for i in range(50):
+        name = random.choice(supplier_names) + f" {i}"
+        contact = "9" + str(random.randint(100000000, 999999999))
+        address = f"Pune Area {random.randint(1, 20)}"
         c.execute("INSERT INTO supplier(name, contact, address) VALUES (?, ?, ?)",
-                  (f"Supplier {i}", f"99999{i:05}", f"Address {i}"))
+                  (name, contact, address))
 
     # Products
-    for i in range(1, 31):
+    for i in range(70):
+        name = random.choice(product_names)
+        price = random.randint(500, 50000)
+        quantity = random.randint(1, 100)
         c.execute("INSERT INTO product(name, price, quantity) VALUES (?, ?, ?)",
-                  (f"Product {i}", i*10, i*5))
+                  (name, price, quantity))
 
     # Purchases
-    for i in range(1, 51):
+    for i in range(100):
+        supplier_id = random.randint(1, 50)
+        total = random.randint(1000, 100000)
         c.execute("INSERT INTO purchase(supplier_id, total) VALUES (?, ?)",
-                  (i % 20 + 1, i * 100))
+                  (supplier_id, total))
 
     conn.commit()
-    st.success("Dummy Data Generated!")
+    st.success("Realistic Data Generated!")
 menu = ["Supplier", "Product", "Purchase"]
 choice = st.sidebar.selectbox("Menu", menu)
 
