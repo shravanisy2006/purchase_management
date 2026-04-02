@@ -12,8 +12,6 @@ c.execute("CREATE TABLE IF NOT EXISTS purchase(id INTEGER PRIMARY KEY, supplier_
 
 st.title("🛒 Purchase Management System")
 
-st.title("🛒 Purchase Management System")
-
 import random
 
 if st.button("Generate Realistic Data"):
