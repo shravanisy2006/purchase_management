@@ -12,6 +12,24 @@ c.execute("CREATE TABLE IF NOT EXISTS purchase(id INTEGER PRIMARY KEY, supplier_
 
 st.title("🛒 Purchase Management System")
 
+if st.button("Generate Dummy Data"):
+    # Suppliers
+    for i in range(1, 21):
+        c.execute("INSERT INTO supplier(name, contact, address) VALUES (?, ?, ?)",
+                  (f"Supplier {i}", f"99999{i:05}", f"Address {i}"))
+
+    # Products
+    for i in range(1, 31):
+        c.execute("INSERT INTO product(name, price, quantity) VALUES (?, ?, ?)",
+                  (f"Product {i}", i*10, i*5))
+
+    # Purchases
+    for i in range(1, 51):
+        c.execute("INSERT INTO purchase(supplier_id, total) VALUES (?, ?)",
+                  (i % 20 + 1, i * 100))
+
+    conn.commit()
+    st.success("Dummy Data Generated!")
 menu = ["Supplier", "Product", "Purchase"]
 choice = st.sidebar.selectbox("Menu", menu)
 
