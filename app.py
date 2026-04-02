@@ -26,7 +26,11 @@ if choice == "Supplier":
         conn.commit()
         st.success("Added!")
 
-    st.write(c.execute("SELECT * FROM supplier").fetchall())
+   import pandas as pd
+
+    data = c.execute("SELECT * FROM supplier").fetchall()
+    df = pd.DataFrame(data, columns=["ID", "Name", "Contact", "Address"])
+    st.table(df)
 
 # Product
 elif choice == "Product":
@@ -40,7 +44,9 @@ elif choice == "Product":
         conn.commit()
         st.success("Added!")
 
-    st.write(c.execute("SELECT * FROM product").fetchall())
+    data = c.execute("SELECT * FROM product").fetchall()
+    df = pd.DataFrame(data, columns=["ID", "Name", "Price", "Quantity"])
+    st.table(df)
 
 # Purchase
 elif choice == "Purchase":
@@ -53,4 +59,6 @@ elif choice == "Purchase":
         conn.commit()
         st.success("Recorded!")
 
-    st.write(c.execute("SELECT * FROM purchase").fetchall())
+    data = c.execute("SELECT * FROM purchase").fetchall()
+    df = pd.DataFrame(data, columns=["ID", "Supplier_ID", "Total"])
+    st.table(df)
