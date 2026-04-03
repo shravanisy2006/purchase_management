@@ -57,6 +57,14 @@ choice = st.sidebar.selectbox("Menu", menu)
 
 # Supplier
 if choice == "Supplier":
+    st.subheader("Delete Supplier")
+
+    delete_id = st.number_input("Enter Supplier ID to delete", step=1)
+
+    if st.button("Delete Supplier"):
+        c.execute("DELETE FROM supplier WHERE id = ?", (delete_id,))
+        conn.commit()
+        st.success("Supplier Deleted!")
     st.subheader("Add Supplier")
     name = st.text_input("Name")
     contact = st.text_input("Contact")
@@ -74,6 +82,14 @@ if choice == "Supplier":
 
 # Product
 elif choice == "Product":
+    st.subheader("Delete Product")
+
+    delete_id = st.number_input("Enter Product ID to delete", step=1)
+
+    if st.button("Delete Product"):
+        c.execute("DELETE FROM product WHERE id = ?", (delete_id,))
+        conn.commit()
+        st.success("Product Deleted!")
     st.subheader("Add Product")
     name = st.text_input("Product Name")
     price = st.number_input("Price")
@@ -90,6 +106,14 @@ elif choice == "Product":
 
 # Purchase
 elif choice == "Purchase":
+    st.subheader("Delete Purchase")
+
+    delete_id = st.number_input("Enter Purchase ID to delete", step=1)
+    
+    if st.button("Delete Purchase"):
+        c.execute("DELETE FROM purchase WHERE id = ?", (delete_id,))
+        conn.commit()
+        st.success("Purchase Deleted!")
     st.subheader("Record Purchase")
     supplier_id = st.number_input("Supplier ID")
     total = st.number_input("Total Amount")
